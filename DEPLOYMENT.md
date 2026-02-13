@@ -31,9 +31,19 @@ This is the easiest and most reliable way to host Streamlit apps. It's free and 
 **Note on Data Persistence:**
 Streamlit Cloud (and Vercel) does not persist local files like `trades.csv` permanently. If the app restarts (which happens frequently), your trades might reset to the initial state. To fix this for a production app, you should eventually connect a database (like Google Sheets or Supabase).
 
-### Option B: Vercel (Advanced/Experimental)
-Vercel is optimized for serverless functions and static sites. Streamlit requires a persistent server, so deploying it to Vercel is difficult and often unstable due to timeout limits and websocket issues.
+### Option B: Vercel (Configured via vercel.json)
+Your project is now configured with a `vercel.json` file for Python deployment.
 
-If you strictly require Vercel, you would need to wrap the application in a Docker container (using Vercel's legacy support or a different service) or use a third-party adapter, which is not recommended for this type of financial dashboard.
+1.  Go to [Vercel Dashboard](https://vercel.com/dashboard).
+2.  Click **"Add New..."** -> **"Project"**.
+3.  Import `codewithdadady/US-P-L`.
+4.  **Framework Preset:** Leave as "Other".
+5.  **Environment Variables:** You may need to add any API keys if required.
+6.  Click **Deploy**.
 
-**Recommendation:** Stick to **Streamlit Community Cloud** or **Render** for a hassle-free experience.
+**Common Vercel Errors:**
+- **500 Server Error / Application Error:** Often means Streamlit is trying to use websockets which Vercel Serverless doesn't support well.
+- **Timeout:** If the app takes too longer than 10s (Hobby) or 60s (Pro) to start.
+- **Module Not Found:** Check `requirements.txt` is in the root.
+
+To fix "Application Error", ensure your `vercel.json` points to the correct entry point (we set it to `dashboard.py`). If it still fails, it confirms Vercel's incompatibility with Streamlit's server model. In that case, **Streamlit Community Cloud is the only viable free alternative.**
