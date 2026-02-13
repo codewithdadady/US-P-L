@@ -553,7 +553,7 @@ if not trades_df.empty:
                 return f'color: {color}; font-weight: bold'
             return ''
         
-        styled_monthly = monthly_perf.style.applymap(color_negative_red)
+        styled_monthly = monthly_perf.style.map(color_negative_red)
         st.dataframe(styled_monthly, use_container_width=True, height=200)
     else:
         st.info("Add more trades!")
