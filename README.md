@@ -8,6 +8,30 @@ A lightweight, real-time portfolio tracker built with Python and Streamlit. Trac
 
 ---
 
+## 🌐 Deployment & Cloud Hosting
+
+### ❓ Why Vercel doesn't work for this app
+Vercel is designed for **Serverless Functions** (short-lived scripts that run for a few seconds). 
+Streamlit apps require a **Persistent Server** (a computer that stays on) to:
+1.  Maintain a **WebSocket connection** for live updates.
+2.  Remember variables (like `st.session_state`) between clicks.
+
+If you deploy to Vercel, the server "shuts down" after every interaction, causing the app to crash or reset immediately.
+
+### ✅ How to Setup your Free Streamlit URL
+Since your code is already on GitHub, you can get a live URL in 2 minutes:
+
+1.  Go to **[share.streamlit.io](https://share.streamlit.io/)**
+2.  Click **"Sign in with GitHub"**.
+3.  Click the blue **"New app"** button.
+4.  **Repository:** Select `codewithdadady/US-P-L`
+5.  **Main file path:** `dashboard.py`
+6.  Click **"Deploy!"**
+
+Your app will be live at a URL like `https://us-p-l-codewithdadady.streamlit.app`.
+
+---
+
 ## 🌟 Features
 
 ### Real-Time Tracking
