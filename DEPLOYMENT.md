@@ -42,9 +42,12 @@ If Streamlit Cloud is having issues, **Render** is the best free alternative for
 5.  **Region:** Select one close to you (e.g., Singapore or Oregon).
 6.  **Runtime:** "Python 3".
 7.  **Build Command:** `pip install -r requirements.txt` (Render usually auto-detects this).
-8.  **Start Command:** `streamlit run dashboard.py --server.port $PORT --server.address 0.0.0.0` (or leave blank, as we added a `Procfile` which Render will read automatically).
-9.  **Instance Type:** "Free".
-10. Click **"Create Web Service"**.
+8.  **Start Command:** `streamlit run dashboard.py --server.port $PORT --server.address 0.0.0.0` (or leave blank).
+9.  **Important:** Under "Advanced" or "Environment Variables", add:
+    *   Key: `PYTHON_VERSION`
+    *   Value: `3.9.18`
+10. **Instance Type:** "Free".
+11. Click **"Create Web Service"**.
 
 **Note:** The Free Tier on Render spins down after 15 minutes of inactivity. It will take about 50 seconds to "wake up" when you visit it again. This is normal for free hosting.
 
