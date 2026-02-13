@@ -31,19 +31,20 @@ This is the easiest and most reliable way to host Streamlit apps. It's free and 
 **Note on Data Persistence:**
 Streamlit Cloud (and Vercel) does not persist local files like `trades.csv` permanently. If the app restarts (which happens frequently), your trades might reset to the initial state. To fix this for a production app, you should eventually connect a database (like Google Sheets or Supabase).
 
-### Option B: Vercel (Configured via vercel.json)
-Your project is now configured with a `vercel.json` file for Python deployment.
+### Option B: Render.com (Highly Recommended Alternative)
 
-1.  Go to [Vercel Dashboard](https://vercel.com/dashboard).
-2.  Click **"Add New..."** -> **"Project"**.
-3.  Import `codewithdadady/US-P-L`.
-4.  **Framework Preset:** Leave as "Other".
-5.  **Environment Variables:** You may need to add any API keys if required.
-6.  Click **Deploy**.
+If Streamlit Cloud is having issues, **Render** is the best free alternative for Python apps. It supports persistent servers natively.
 
-**Common Vercel Errors:**
-- **500 Server Error / Application Error:** Often means Streamlit is trying to use websockets which Vercel Serverless doesn't support well.
-- **Timeout:** If the app takes too longer than 10s (Hobby) or 60s (Pro) to start.
-- **Module Not Found:** Check `requirements.txt` is in the root.
+1.  Go to **[render.com](https://render.com/)** and sign up/login with GitHub.
+2.  Click **"New +"** -> **"Web Service"**.
+3.  Connect to your repository: `codewithdadady/US-P-L`.
+4.  **Name:** `us-stock-pnl` (or similar).
+5.  **Region:** Select one close to you (e.g., Singapore or Oregon).
+6.  **Runtime:** "Python 3".
+7.  **Build Command:** `pip install -r requirements.txt` (Render usually auto-detects this).
+8.  **Start Command:** `streamlit run dashboard.py --server.port $PORT --server.address 0.0.0.0` (or leave blank, as we added a `Procfile` which Render will read automatically).
+9.  **Instance Type:** "Free".
+10. Click **"Create Web Service"**.
 
-To fix "Application Error", ensure your `vercel.json` points to the correct entry point (we set it to `dashboard.py`). If it still fails, it confirms Vercel's incompatibility with Streamlit's server model. In that case, **Streamlit Community Cloud is the only viable free alternative.**
+**Note:** The Free Tier on Render spins down after 15 minutes of inactivity. It will take about 50 seconds to "wake up" when you visit it again. This is normal for free hosting.
+
